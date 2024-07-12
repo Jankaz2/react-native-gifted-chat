@@ -64,7 +64,7 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(
     onPressActionButton,
     renderComposer,
     renderSend,
-    renderAccessory,
+    //renderAccessory,
   } = rest
 
   return (
@@ -75,11 +75,11 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(
         {renderComposer?.(props as ComposerProps) || <Composer {...props} />}
         {renderSend?.(props) || <Send {...props} />}
       </View>
-      {props.shouldRenderAccessory && renderAccessory ? (
-        <View style={[styles.accessory, props.accessoryStyle]}>
-          {renderAccessory(props)}
-        </View>
-      ) : undefined}
+      {/*{props.shouldRenderAccessory && renderAccessory ? (*/}
+      {/*  <View style={[styles.accessory, props.accessoryStyle]}>*/}
+      {/*    {renderAccessory(props)}*/}
+      {/*  </View>*/}
+      {/*) : undefined}*/}
     </View>
   )
 }
