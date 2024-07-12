@@ -36,6 +36,7 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   renderSend?(props: SendProps<TMessage>): React.ReactNode
   renderComposer?(props: ComposerProps): React.ReactNode
   onPressActionButton?(): void
+  shouldRenderAccessory?: boolean
 }
 
 export function InputToolbar<TMessage extends IMessage = IMessage>(
@@ -74,11 +75,11 @@ export function InputToolbar<TMessage extends IMessage = IMessage>(
         {renderComposer?.(props as ComposerProps) || <Composer {...props} />}
         {renderSend?.(props) || <Send {...props} />}
       </View>
-      {renderAccessory && (
+      {props.shouldRenderAccessory && renderAccessory ? (
         <View style={[styles.accessory, props.accessoryStyle]}>
           {renderAccessory(props)}
         </View>
-      )}
+      ) : undefined}
     </View>
   )
 }
