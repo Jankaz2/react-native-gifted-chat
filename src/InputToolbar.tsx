@@ -22,9 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  accessory: {
-    height: 0,
-  },
+  accessory: {},
 })
 
 export interface InputToolbarProps<TMessage extends IMessage> {
