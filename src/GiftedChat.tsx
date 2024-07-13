@@ -21,7 +21,8 @@ import {
   ViewStyle,
 } from 'react-native'
 import { LightboxProps } from 'react-native-lightbox-v2'
-import { v4 } from 'uuid'
+import 'react-native-get-random-values'
+import { v4 as uuid } from 'uuid'
 import { Actions, ActionsProps } from './Actions'
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
@@ -238,7 +239,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
     text = undefined,
     initialText = '',
     isTyping,
-    messageIdGenerator = () => v4(),
+    messageIdGenerator = () => uuid(),
     user = {},
     onSend = () => {},
     locale = 'en',
