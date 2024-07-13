@@ -21,7 +21,7 @@ import {
   ViewStyle,
 } from 'react-native'
 import { LightboxProps } from 'react-native-lightbox-v2'
-import {v4} from 'uuid';
+import { v4 } from 'uuid'
 import { Actions, ActionsProps } from './Actions'
 import { Avatar, AvatarProps } from './Avatar'
 import Bubble from './Bubble'
