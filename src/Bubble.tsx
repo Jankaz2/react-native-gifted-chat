@@ -531,27 +531,27 @@ export default class Bubble<
           ]}
         >
           <>
-          <TouchableWithoutFeedback
-            onPress={this.onPress}
-            onLongPress={this.onLongPress}
-            accessibilityRole='text'
-            {...this.props.touchableProps}
-          >
-            <View>
-              {this.renderBubbleContent()}
-              <View
-                style={[
-                  styles[position].bottom,
-                  bottomContainerStyle && bottomContainerStyle[position],
-                ]}
-              >
-                {this.renderUsername()}
-                {this.renderTime()}
-                {this.renderTicks()}
+            <TouchableWithoutFeedback
+              onPress={this.onPress}
+              onLongPress={this.onLongPress}
+              accessibilityRole='text'
+              {...this.props.touchableProps}
+            >
+              <View>
+                {this.renderBubbleContent()}
+                <View
+                  style={[
+                    styles[position].bottom,
+                    bottomContainerStyle && bottomContainerStyle[position],
+                  ]}
+                >
+                  {this.renderUsername()}
+                  {this.renderTime()}
+                  {this.renderTicks()}
+                </View>
               </View>
-            </View>
-          </TouchableWithoutFeedback>
-          <Text>ACTIONS</Text>
+            </TouchableWithoutFeedback>
+            <Text>ACTIONS</Text>
           </>
         </View>
         <Text>ACTIONS2</Text>
