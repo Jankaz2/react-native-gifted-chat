@@ -538,6 +538,7 @@ export default class Bubble<
           >
             <View>
               {this.renderBubbleContent()}
+              <Text>ACTIONS</Text>
               <View
                 style={[
                   styles[position].bottom,
