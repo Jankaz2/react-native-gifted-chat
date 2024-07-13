@@ -327,7 +327,7 @@ function GiftedChat<TMessage extends IMessage = IMessage>(
   const calculateInputToolbarHeight = (composerHeight: number) => {
     const getMinInputToolbarHeight =
       renderAccessory && shouldKeepHeightForAccessory
-        ? minInputToolbarHeight! * 2
+        ? minInputToolbarHeight + 10
         : minInputToolbarHeight
 
     return composerHeight + (getMinInputToolbarHeight! - minComposerHeight!)
