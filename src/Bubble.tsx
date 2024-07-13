@@ -538,7 +538,6 @@ export default class Bubble<
           >
             <View>
               {this.renderBubbleContent()}
-              <Text>ACTIONS</Text>
               <View
                 style={[
                   styles[position].bottom,
@@ -550,6 +549,7 @@ export default class Bubble<
                 {this.renderTicks()}
               </View>
             </View>
+            <Text>ACTIONS</Text>
           </TouchableWithoutFeedback>
         </View>
         {this.renderQuickReplies()}
