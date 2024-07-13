@@ -530,6 +530,7 @@ export default class Bubble<
             wrapperStyle && wrapperStyle[position],
           ]}
         >
+          <>
           <TouchableWithoutFeedback
             onPress={this.onPress}
             onLongPress={this.onLongPress}
@@ -549,10 +550,11 @@ export default class Bubble<
                 {this.renderTicks()}
               </View>
             </View>
-            <Text>ACTIONS</Text>
           </TouchableWithoutFeedback>
+          <Text>ACTIONS</Text>
+          </>
         </View>
-        {this.renderQuickReplies()}
+        <Text>ACTIONS2</Text>
       </View>
     )
   }
