@@ -551,10 +551,11 @@ export default class Bubble<
                 </View>
               </View>
             </TouchableWithoutFeedback>
-            <Text>ACTIONS</Text>
           </>
         </View>
-        <Text>ACTIONS2</Text>
+        {
+          position === 'left' ?  <Text>ACT</Text> : null
+        }
       </View>
     )
   }
