@@ -553,9 +553,7 @@ export default class Bubble<
             </TouchableWithoutFeedback>
           </>
         </View>
-        {
-          position === 'left' ?  <Text>ACT</Text> : null
-        }
+        {position === 'left' ? <Text>ACT</Text> : null}
       </View>
     )
   }
