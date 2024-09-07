@@ -149,6 +149,7 @@ export interface BubbleProps<TMessage extends IMessage> {
   quickReplyStyle?: StyleProp<ViewStyle>
   quickReplyTextStyle?: StyleProp<TextStyle>
   quickReplyContainerStyle?: StyleProp<ViewStyle>
+  renderLeftBubbleActions?(): React.ReactNode
   onPress?(context?: unknown, message?: unknown): void
   onLongPress?(context?: unknown, message?: unknown): void
   onQuickReply?(replies: Reply[]): void
@@ -190,6 +191,7 @@ export default class Bubble<
     renderTicks: null,
     renderTime: null,
     renderQuickReplies: null,
+    renderLeftBubbleActions: null,
     onQuickReply: null,
     position: 'left',
     currentMessage: {
@@ -223,6 +225,7 @@ export default class Bubble<
     renderTime: PropTypes.func,
     renderTicks: PropTypes.func,
     renderQuickReplies: PropTypes.func,
+    renderLeftBubbleActions: PropTypes.func,
     onQuickReply: PropTypes.func,
     position: PropTypes.oneOf(['left', 'right']),
     optionTitles: PropTypes.arrayOf(PropTypes.string),
@@ -589,7 +592,9 @@ export default class Bubble<
             </View>
           </TouchableWithoutFeedback>
         </View>
-        {this.renderQuickReplies()}
+        {position === 'left' && this.props.renderLeftBubbleActions
+          ? this.props.renderLeftBubbleActions()
+          : null}
       </View>
     )
   }

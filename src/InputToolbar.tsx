@@ -22,6 +22,7 @@ export interface InputToolbarProps<TMessage extends IMessage> {
   onPressActionButton?(): void
   icon?: () => React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
+  shouldRenderAccessory?: boolean
 }
 
 export function InputToolbar<TMessage extends IMessage = IMessage> (
@@ -38,6 +39,7 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
     icon,
     wrapperStyle,
     containerStyle,
+    shouldRenderAccessory,
   } = props
 
   const actionsFragment = useMemo(() => {
@@ -77,11 +79,13 @@ export function InputToolbar<TMessage extends IMessage = IMessage> (
         {composerFragment}
         {renderSend?.(props) || <Send {...props} />}
       </View>
-      {renderAccessory && (
-        <View style={[styles.accessory, props.accessoryStyle]}>
-          {renderAccessory(props)}
-        </View>
-      )}
+      {shouldRenderAccessory && renderAccessory
+        ? (
+          <View style={[styles.accessory, props.accessoryStyle]}>
+            {renderAccessory(props)}
+          </View>
+        )
+        : undefined}
     </View>
   )
 }
@@ -107,7 +111,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  accessory: {
-    height: 44,
-  },
+  accessory: {},
 })
