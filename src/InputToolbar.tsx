@@ -112,6 +112,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   accessory: {
-    height: 100,
+    height: 'auto',
   },
 })
