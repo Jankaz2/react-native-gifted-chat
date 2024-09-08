@@ -281,6 +281,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   )
   const [text, setText] = useState<string | undefined>(() => props.text || '')
   const [isTypingDisabled, setIsTypingDisabled] = useState<boolean>(false)
+  const [messagesContainerHeight, setMessagesContainerHeight] = useState<number | undefined>(undefined)
 
   const keyboard = useAnimatedKeyboard()
   const trackingKeyboardMovement = useSharedValue(false)
@@ -297,6 +298,12 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     [keyboard, keyboardOffsetBottom]
   )
 
+  const calculateInputToolbarHeight = useCallback(() => {
+    const baseHeight = Math.max(minComposerHeight!, composerHeight)
+    // Add the accessory height if `shouldKeepHeightForAccessory` is true
+    return shouldKeepHeightForAccessory ? baseHeight + 15 : baseHeight
+  }, [composerHeight, shouldKeepHeightForAccessory, minComposerHeight])
+
   const getTextFromProp = useCallback(
     (fallback: string) => {
       if (props.text === undefined)
@@ -306,11 +313,6 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     },
     [props.text]
   )
-
-  const calculateInputToolbarHeight = useCallback(() => {
-    const baseHeight = Math.max(minComposerHeight!, composerHeight)
-    return shouldKeepHeightForAccessory ? baseHeight + 15 : baseHeight
-  }, [composerHeight, shouldKeepHeightForAccessory, minComposerHeight])
 
   /**
    * Store text input focus status when keyboard hide to retrieve
@@ -382,7 +384,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     const { messagesContainerStyle, ...messagesContainerProps } = props
 
     const fragment = (
-      <View style={[styles.fill, messagesContainerStyle]}>
+      <View style={[styles.fill, messagesContainerStyle, { height: messagesContainerHeight }]}>
         <MessageContainer
           {...messagesContainerProps}
           invertibleScrollViewProps={{
@@ -407,6 +409,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     keyboardShouldPersistTaps,
     messageContainerRef,
     renderChatFooter,
+    messagesContainerHeight,
   ])
 
   const notifyInputTextReset = useCallback(() => {
@@ -489,6 +492,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
       notifyInputTextReset()
 
+      const adjustedHeight = shouldKeepHeightForAccessory ? layout.height - 15 : layout.height
+      setMessagesContainerHeight(adjustedHeight)
       setIsInitialized(true)
       setComposerHeight(minComposerHeight!)
       setText(getTextFromProp(initialText))
@@ -503,7 +508,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     const inputToolbarProps = {
       ...props,
       text: getTextFromProp(text!),
-      composerHeight: calculateInputToolbarHeight(), // Use the updated height calculation
+      composerHeight: calculateInputToolbarHeight(),
       onSend: _onSend,
       onInputSizeChanged,
       onTextChanged: _onInputTextChanged,
@@ -521,8 +526,8 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   }, [
     isInitialized,
     _onSend,
+    calculateInputToolbarHeight,
     getTextFromProp,
-    calculateInputToolbarHeight, // Ensure this is included here
     maxInputLength,
     minComposerHeight,
     onInputSizeChanged,
@@ -542,7 +547,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
         actionSheet ||
         (() => ({
           showActionSheetWithOptions:
-            actionSheetRef.current!.showActionSheetWithOptions,
+          actionSheetRef.current!.showActionSheetWithOptions,
         })),
       getLocale: () => locale,
     }),
