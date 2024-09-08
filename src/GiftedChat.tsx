@@ -492,7 +492,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
 
       notifyInputTextReset()
 
-      const adjustedHeight = shouldKeepHeightForAccessory ? layout.height - 15 : layout.height
+      const adjustedHeight = shouldKeepHeightForAccessory ? layout.height - 60 : layout.height
       setMessagesContainerHeight(adjustedHeight)
       setIsInitialized(true)
       setComposerHeight(minComposerHeight!)
