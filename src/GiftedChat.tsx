@@ -301,7 +301,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
   const calculateInputToolbarHeight = useCallback(() => {
     const baseHeight = Math.max(minComposerHeight!, composerHeight)
     // Add the accessory height if `shouldKeepHeightForAccessory` is true
-    return shouldKeepHeightForAccessory ? baseHeight + 15 : baseHeight
+    return shouldKeepHeightForAccessory ? baseHeight + 60 : baseHeight
   }, [composerHeight, shouldKeepHeightForAccessory, minComposerHeight])
 
   const getTextFromProp = useCallback(
