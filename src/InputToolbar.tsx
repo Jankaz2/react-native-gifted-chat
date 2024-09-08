@@ -111,5 +111,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-  accessory: {},
+  accessory: {
+    height: 44,
+  },
 })
