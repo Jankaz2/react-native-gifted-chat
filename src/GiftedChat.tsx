@@ -145,6 +145,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   /* infinite scroll up when reach the top of messages container, automatically call onLoadEarlier function if exist */
   infiniteScroll?: boolean
   timeTextStyle?: LeftRightStyle<TextStyle>
+  shouldKeepHeightForAccessory?: boolean
   /* Custom action sheet */
   actionSheet?(): {
     showActionSheetWithOptions: (
@@ -257,6 +258,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     inverted = true,
     minComposerHeight = MIN_COMPOSER_HEIGHT,
     maxComposerHeight = MAX_COMPOSER_HEIGHT,
+    shouldKeepHeightForAccessory = null,
   } = props
 
   const actionSheetRef = useRef<ActionSheetProviderRef>(null)
@@ -304,6 +306,11 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     },
     [props.text]
   )
+
+  const calculateInputToolbarHeight = useCallback(() => {
+    const baseHeight = Math.max(minComposerHeight!, composerHeight)
+    return shouldKeepHeightForAccessory ? baseHeight + 15 : baseHeight
+  }, [composerHeight, shouldKeepHeightForAccessory, minComposerHeight])
 
   /**
    * Store text input focus status when keyboard hide to retrieve
@@ -496,7 +503,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     const inputToolbarProps = {
       ...props,
       text: getTextFromProp(text!),
-      composerHeight: Math.max(minComposerHeight!, composerHeight),
+      composerHeight: calculateInputToolbarHeight(), // Use the updated height calculation
       onSend: _onSend,
       onInputSizeChanged,
       onTextChanged: _onInputTextChanged,
@@ -515,6 +522,7 @@ function GiftedChat<TMessage extends IMessage = IMessage> (
     isInitialized,
     _onSend,
     getTextFromProp,
+    calculateInputToolbarHeight, // Ensure this is included here
     maxInputLength,
     minComposerHeight,
     onInputSizeChanged,
